@@ -20,7 +20,7 @@ def read(ocr, ocg, ocb, icr, icg, icb, mcr, mcg, mcb, sze):
         if i % 100 == 0:
             print(i)
         # if i % 10000 == 0:
-    output.save(f"NFTs/MandelbrotTemp32001({ocr},{ocg},{ocb}),({icr},{icg},{icb}),({mcr},{mcg},{mcb}),35,5000.png")
+    output.save(f"photos/MandelbrotTemp{sze}({ocr},{ocg},{ocb}),({icr},{icg},{icb}),({mcr},{mcg},{mcb}).png")
 
     
 
