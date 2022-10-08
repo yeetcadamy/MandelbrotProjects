@@ -1,26 +1,11 @@
 from PIL import Image
 import cmath
-from twilio.rest import Client
 
-size = int(input())
+size = int(input("Enter the side length that you want for the template: ))
 output = Image.new("RGB", (size, size // 2 + 1), (0, 0, 0))
 
 def mandelbrot(z, c):
     return z ** 2 + c
-
-
-def send(val):
-    account_sid = 'AC34e7ad9e631e1e388d1394ac67696500'
-    auth_token = '40948bc6168047618a87cfaf1fcbbb3f'
-    client = Client(account_sid, auth_token)
-
-    message = client.messages \
-        .create(
-        body=f'{val}',
-        from_='+447723141017',
-        to='+447557022993'
-    )
-    print(message.sid)
 
 
 pixels = output.load()
@@ -43,8 +28,6 @@ for i in range(-size // 2 + 1, size // 2 + 1):
             quit()
     if i % 100 == 0:
         print(i)
-    # if i % 10000 == 0:
-        # send(str(i))
 
 
 output.save(f"MandelbrotTemplate{size}.png")
