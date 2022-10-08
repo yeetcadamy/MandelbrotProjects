@@ -1,9 +1,8 @@
 from PIL import Image
-from twilio.rest import Client
 
-def read(ocr, ocg, ocb, icr, icg, icb, mcr, mcg, mcb):
-    Image.MAX_IMAGE_PIXELS = 32001 ** 2
-    temp = Image.open("MandelbrotTemplate32001,5000,cor.png")
+def read(ocr, ocg, ocb, icr, icg, icb, mcr, mcg, mcb, sze):
+    Image.MAX_IMAGE_PIXELS = sze ** 2
+    temp = Image.open(f"MandelbrotTemplate{sze}.png")
     print("Template loaded")
     output = Image.new("RGB", (32001, 32001), (0, 0, 0))
     tempPixels = temp.load()
@@ -21,23 +20,8 @@ def read(ocr, ocg, ocb, icr, icg, icb, mcr, mcg, mcb):
         if i % 100 == 0:
             print(i)
         # if i % 10000 == 0:
-        #     send(str(i))
     output.save(f"NFTs/MandelbrotTemp32001({ocr},{ocg},{ocb}),({icr},{icg},{icb}),({mcr},{mcg},{mcb}),35,5000.png")
-    # send("Image completed")
 
+    
 
-def send(val):
-    account_sid = 'AC34e7ad9e631e1e388d1394ac67696500'
-    auth_token = '40948bc6168047618a87cfaf1fcbbb3f'
-    client = Client(account_sid, auth_token)
-
-    message = client.messages \
-        .create(
-        body=f'{val}',
-        from_='+447723141017',
-        to='+447557022993'
-    )
-    print(message.sid)
-
-
-read(0, 0, 0, 255, 255, 255, 0, 0, 0)
+read(input("Enter the red value of the pixels on the border of the image: "), input("Enter the green value of the pixels on the border of the image: "), input("Enter the blue value of the pixels on the border of the image: "), input("Enter the red value of the pixels on the border of the mandelbrot: "), input("Enter the green value of the pixels on the border of the mandelbrot: "), input("Enter the blue value of the pixels on the border of the mandelbrot: "), input("Enter the red value of the pixels inside the mandelbrot: "), input("Enter the green value of the pixels inside the mandelbrot: "), input("Enter the blue value of the pixels inside the mandelbrot: "), input("Enter the side length of the template file: "))
